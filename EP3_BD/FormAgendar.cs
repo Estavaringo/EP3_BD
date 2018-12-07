@@ -17,6 +17,7 @@ namespace EP3_BD {
         List<Especialidade> especialidades;
         List<Medico> medicos;
         List<Agenda> agendas;
+        List<int> horarios;
 
         public FormAgendar(Form formMain) {
             InitializeComponent();
@@ -71,6 +72,9 @@ namespace EP3_BD {
         }
 
         private void cmbMedico_SelectedIndexChanged(object sender, EventArgs e) {
+            cmbDia.SelectedItem = null;
+            cmbDia.Items.Clear();
+            cmbDia.Items.Add(" ");
             if (cmbMedico.SelectedItem != null) {
                 if (cmbMedico.SelectedItem.ToString().Equals(" ")) {
                     lblDia.Hide();
@@ -91,6 +95,30 @@ namespace EP3_BD {
                 lblDia.Hide();
                 lblHorario.Hide();
                 cmbDia.Hide();
+                cmbHorario.Hide();
+            }
+        }
+
+        private void cmbDia_SelectedIndexChanged(object sender, EventArgs e) {
+            cmbHorario.SelectedItem = null;
+            cmbHorario.Items.Clear();
+            cmbHorario.Items.Add(" ");
+            if (cmbDia.SelectedItem != null) {
+                if (cmbDia.SelectedItem.ToString().Equals(" ")) {
+                    lblHorario.Hide();
+                    cmbHorario.Hide();
+                } else {
+                    lblHorario.Show();
+                    cmbHorario.Show();
+                    cmbHorario.Items.Clear();
+                    cmbHorario.Items.Add(" ");
+                    //horarios = AgendaDAO.ConsultarDisponibilidadeDias(cmbMedico.SelectedItem.ToString());
+                    //foreach (Agenda agenda in agendas) {
+                    //    cmbDia.Items.Add(agenda.diaDaSemana);
+                    //}
+                }
+            } else {
+                lblHorario.Hide();
                 cmbHorario.Hide();
             }
         }

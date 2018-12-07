@@ -89,6 +89,7 @@
             this.cmbDia.Name = "cmbDia";
             this.cmbDia.Size = new System.Drawing.Size(106, 21);
             this.cmbDia.TabIndex = 5;
+            this.cmbDia.SelectedIndexChanged += new System.EventHandler(this.cmbDia_SelectedIndexChanged);
             // 
             // lblHorario
             // 
