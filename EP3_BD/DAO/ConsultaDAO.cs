@@ -14,7 +14,8 @@ namespace EP3_BD.DAO
         public static List<Consulta> GetConsultas(string id, string crm, string paciente)
         {
             List<Consulta> lista = new List<Consulta>();
-            BDConnection bDConnection = new BDConnection("sql9.freemysqlhosting.net", "sql9268839", "sql9268839", "fIvFmkmzgc");
+            BDConnection bDConnection = new BDConnection("localhost", "mydb", "root", "123456");
+            
             MySqlConnection connection = bDConnection.connect();
             var command = connection.CreateCommand();
 
@@ -82,5 +83,88 @@ namespace EP3_BD.DAO
             return lista;
              
         }
+
+        public static void inserirConsulta(Paciente paciente, String medico, String especialidade, int horario, DateTime data) {
+
+            BDConnection bDConnection = new BDConnection("localhost", "mydb", "root", "123456");
+            MySqlConnection connection = bDConnection.connect();
+            var command = connection.CreateCommand();
+            int idPaciente;
+            int crm;
+            int idEspecialidade;
+            int horarioFim = horario + 1;
+
+
+            try {
+                connection.Open();
+                command.CommandText =
+
+                    "INSERT INTO PACIENTE " +
+                "(CPF, " +
+                "Nome, " +
+                "Telefone, " +
+                "`Idade`, " +
+                "`Sexo`) " +
+                "VALUES" +
+                "('" + paciente.CPF + "', " +
+                "'" + paciente.nome + "', " +
+                "'" + paciente.telefone + "', " +
+                "" + paciente.idade + ", " +
+                "'" + paciente.sexo + "')";
+
+                command.ExecuteNonQuery();
+
+
+
+                command.CommandText =
+                    "SELECT ID_PACIENTE " +
+                    "FROM PACIENTE P " +
+                    "WHERE P.CPF = '" + paciente.CPF + "'";
+
+                idPaciente = Convert.ToInt16(command.ExecuteScalar());
+
+
+                command.CommandText =
+                    "SELECT CRM " +
+                    "FROM MEDICO M " +
+                    "WHERE M.NOME = '" + medico + "'";
+
+                crm = Convert.ToInt32(command.ExecuteScalar());
+
+                command.CommandText =
+                    "SELECT CODIGO " +
+                    "FROM ESPECIALIDADE E " +
+                    "WHERE E.NOME = '" + especialidade + "'";
+
+                idEspecialidade = Convert.ToInt16(command.ExecuteScalar()); 
+
+
+                
+                                               
+                command.CommandText =
+                    "INSERT INTO CONSULTA " +
+                "(Inicio, " +
+                "Fim, " +
+                "data, " +
+                "id_paciente, " +
+                "crm, " +
+                "especialidade_codigo) " +
+                "VALUES" +
+                "(" + horario + ", " +
+                "" + horarioFim + ", " +
+                "'" + data.ToString("yyyy-MM-dd HH:mm:ss") + "', " +
+                "" + idPaciente + ", " +
+                "" + crm + ", " +
+                "" + idEspecialidade + ")";
+
+                command.ExecuteNonQuery();
+
+            } finally {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+           
+        }
+
     }
 }

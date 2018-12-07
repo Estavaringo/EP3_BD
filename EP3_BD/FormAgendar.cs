@@ -22,7 +22,6 @@ namespace EP3_BD {
             InitializeComponent();
             this.formMain = formMain;
             //dtPicker.MinDate = DateTime.Now;
-            List<int> horarios;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e) {
@@ -87,9 +86,10 @@ namespace EP3_BD {
             cmbHorario.Items.Add(" ");
             if (cmbMedico.SelectedItem != null) {
                 if (cmbMedico.SelectedItem.ToString().Equals(" ")) {
-                    lblDia.Show();
-                    dtPicker.Show();
-                    agendas = AgendaDAO.ConsultarDisponibilidadeDias(cmbEspecialidade.SelectedItem.ToString());
+                    lblDia.Hide();
+                    lblHorario.Hide();
+                    dtPicker.Hide();
+                    cmbHorario.Hide();
                 } else {
                     lblDia.Show();
                     dtPicker.Show();
