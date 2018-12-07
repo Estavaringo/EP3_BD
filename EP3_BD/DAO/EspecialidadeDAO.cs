@@ -12,7 +12,7 @@ namespace EP3_BD.DAO {
 
         public static List<Especialidade> Consultar() {
             List<Especialidade> especialidades = new List<Especialidade>();
-            BDConnection bDConnection = new BDConnection("localhost", "mydb", "root", "123456");
+            BDConnection bDConnection = new BDConnection("sql9.freemysqlhosting.net", "sql9268839", "sql9268839", "123456789");
             MySqlConnection connection = bDConnection.connect();
             var command = connection.CreateCommand();
 

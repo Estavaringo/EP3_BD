@@ -22,5 +22,11 @@ namespace EP3_BD {
             new FormAgendar(this).Show();
             this.Hide();
         }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            new FormConsultar(this).Show();
+            this.Hide();
+        }
     }
 }

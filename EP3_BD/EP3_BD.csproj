@@ -60,8 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\AgendaDAO.cs" />
+    <Compile Include="DAO\ConsultaDAO.cs" />
     <Compile Include="DAO\EspecialidadeDAO.cs" />
     <Compile Include="DAO\MedicoDAO.cs" />
+    <Compile Include="FormConsultar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultar.Designer.cs">
+      <DependentUpon>FormConsultar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAgendar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,10 +83,14 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Agenda.cs" />
+    <Compile Include="Model\Consulta.cs" />
     <Compile Include="Model\Especialidade.cs" />
     <Compile Include="Model\Medico.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormConsultar.resx">
+      <DependentUpon>FormConsultar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAgendar.resx">
       <DependentUpon>FormAgendar.cs</DependentUpon>
     </EmbeddedResource>
