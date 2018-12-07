@@ -28,10 +28,10 @@
             this.lblMedico = new System.Windows.Forms.Label();
             this.cmbMedico = new System.Windows.Forms.ComboBox();
             this.lblDia = new System.Windows.Forms.Label();
-            this.cmbDia = new System.Windows.Forms.ComboBox();
             this.lblHorario = new System.Windows.Forms.Label();
             this.cmbHorario = new System.Windows.Forms.ComboBox();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.dtPicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // cmbEspecialidade
@@ -82,15 +82,6 @@
             this.lblDia.TabIndex = 6;
             this.lblDia.Text = "Selecione o dia:";
             // 
-            // cmbDia
-            // 
-            this.cmbDia.FormattingEnabled = true;
-            this.cmbDia.Location = new System.Drawing.Point(274, 55);
-            this.cmbDia.Name = "cmbDia";
-            this.cmbDia.Size = new System.Drawing.Size(106, 21);
-            this.cmbDia.TabIndex = 5;
-            this.cmbDia.SelectedIndexChanged += new System.EventHandler(this.cmbDia_SelectedIndexChanged);
-            // 
             // lblHorario
             // 
             this.lblHorario.AutoSize = true;
@@ -120,16 +111,24 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
+            // dtPicker
+            // 
+            this.dtPicker.Location = new System.Drawing.Point(274, 56);
+            this.dtPicker.Name = "dtPicker";
+            this.dtPicker.Size = new System.Drawing.Size(210, 20);
+            this.dtPicker.TabIndex = 10;
+            this.dtPicker.ValueChanged += new System.EventHandler(this.dtPicker_ValueChanged);
+            // 
             // FormAgendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(417, 249);
+            this.ClientSize = new System.Drawing.Size(500, 249);
+            this.Controls.Add(this.dtPicker);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.lblHorario);
             this.Controls.Add(this.cmbHorario);
             this.Controls.Add(this.lblDia);
-            this.Controls.Add(this.cmbDia);
             this.Controls.Add(this.lblMedico);
             this.Controls.Add(this.cmbMedico);
             this.Controls.Add(this.lblEspecialidade);
@@ -150,9 +149,9 @@
         private System.Windows.Forms.Label lblMedico;
         private System.Windows.Forms.ComboBox cmbMedico;
         private System.Windows.Forms.Label lblDia;
-        private System.Windows.Forms.ComboBox cmbDia;
         private System.Windows.Forms.Label lblHorario;
         private System.Windows.Forms.ComboBox cmbHorario;
         private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.DateTimePicker dtPicker;
     }
 }

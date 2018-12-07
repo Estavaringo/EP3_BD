@@ -17,14 +17,22 @@ namespace EP3_BD {
         List<Especialidade> especialidades;
         List<Medico> medicos;
         List<Agenda> agendas;
-        List<int> horarios;
 
         public FormAgendar(Form formMain) {
             InitializeComponent();
             this.formMain = formMain;
+            //dtPicker.MinDate = DateTime.Now;
+            List<int> horarios;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e) {
+
+            if (cmbHorario.SelectedItem != null) {
+                if (!cmbHorario.SelectedItem.ToString().Equals(" ")){
+                    new FormPaciente(this, cmbEspecialidade.SelectedItem.ToString(), cmbMedico.SelectedItem.ToString(), Int16.Parse(cmbHorario.SelectedItem.ToString()), dtPicker.Value.Date).Show();
+                    this.Hide();
+                }
+            }
 
         }
 
@@ -32,18 +40,19 @@ namespace EP3_BD {
             lblDia.Hide();
             lblMedico.Hide();
             lblHorario.Hide();
-            cmbDia.Hide();
+            dtPicker.Hide();
             cmbMedico.Hide();
             cmbHorario.Hide();
 
             cmbEspecialidade.Items.Add(" ");
+            
 
 
             especialidades = EspecialidadeDAO.Consultar();
             foreach (Especialidade especialidade in especialidades) {
                 cmbEspecialidade.Items.Add(especialidade.nome);
             }
-        
+
         }
 
         private void FormAgendar_FormClosed(object sender, FormClosedEventArgs e) {
@@ -58,7 +67,7 @@ namespace EP3_BD {
                 lblDia.Hide();
                 lblMedico.Hide();
                 lblHorario.Hide();
-                cmbDia.Hide();
+                dtPicker.Hide();
                 cmbMedico.Hide();
                 cmbHorario.Hide();
             } else {
@@ -72,55 +81,56 @@ namespace EP3_BD {
         }
 
         private void cmbMedico_SelectedIndexChanged(object sender, EventArgs e) {
-            cmbDia.SelectedItem = null;
-            cmbDia.Items.Clear();
-            cmbDia.Items.Add(" ");
+            dtPicker.Hide();
+            cmbHorario.SelectedItem = null;
+            cmbHorario.Items.Clear();
+            cmbHorario.Items.Add(" ");
             if (cmbMedico.SelectedItem != null) {
                 if (cmbMedico.SelectedItem.ToString().Equals(" ")) {
-                    lblDia.Hide();
-                    lblHorario.Hide();
-                    cmbDia.Hide();
-                    cmbHorario.Hide();
+                    lblDia.Show();
+                    dtPicker.Show();
+                    agendas = AgendaDAO.ConsultarDisponibilidadeDias(cmbEspecialidade.SelectedItem.ToString());
                 } else {
                     lblDia.Show();
-                    cmbDia.Show();
-                    cmbDia.Items.Clear();
-                    cmbDia.Items.Add(" ");
-                    agendas = AgendaDAO.ConsultarDisponibilidadeDias(cmbMedico.SelectedItem.ToString());
-                    foreach (Agenda agenda in agendas) {
-                        cmbDia.Items.Add(agenda.diaDaSemana);
-                    }
+                    dtPicker.Show();
+                    agendas = AgendaDAO.ConsultarDisponibilidadeDias(cmbMedico.SelectedItem.ToString(),cmbEspecialidade.SelectedItem.ToString());
                 }
             } else {
                 lblDia.Hide();
                 lblHorario.Hide();
-                cmbDia.Hide();
+                dtPicker.Hide();
                 cmbHorario.Hide();
             }
         }
 
-        private void cmbDia_SelectedIndexChanged(object sender, EventArgs e) {
-            cmbHorario.SelectedItem = null;
-            cmbHorario.Items.Clear();
-            cmbHorario.Items.Add(" ");
-            if (cmbDia.SelectedItem != null) {
-                if (cmbDia.SelectedItem.ToString().Equals(" ")) {
-                    lblHorario.Hide();
-                    cmbHorario.Hide();
-                } else {
-                    lblHorario.Show();
-                    cmbHorario.Show();
-                    cmbHorario.Items.Clear();
-                    cmbHorario.Items.Add(" ");
-                    //horarios = AgendaDAO.ConsultarDisponibilidadeDias(cmbMedico.SelectedItem.ToString());
-                    //foreach (Agenda agenda in agendas) {
-                    //    cmbDia.Items.Add(agenda.diaDaSemana);
-                    //}
-                }
-            } else {
-                lblHorario.Hide();
-                cmbHorario.Hide();
-            }
+        private void dtPicker_ValueChanged(object sender, EventArgs e) {
+            List<int> horarios;
+             cmbHorario.SelectedItem = null;
+             cmbHorario.Items.Clear();
+             cmbHorario.Items.Add(" ");
+
+
+            var culture = new System.Globalization.CultureInfo("pt-BR");
+
+            if (dtPicker.Value != null) {
+                 lblHorario.Show();
+                 cmbHorario.Show();
+                 cmbHorario.Items.Clear();
+                 cmbHorario.Items.Add(" ");
+                 horarios = AgendaDAO.ConsultarDisponibilidadeHorarios(dtPicker.Value, cmbMedico.SelectedItem.ToString());
+                 foreach (Agenda agenda in agendas) {
+                    if (agenda.diaDaSemana.Equals(culture.DateTimeFormat.GetDayName(dtPicker.Value.DayOfWeek).ToString())) {
+                        for (int i = agenda.horaInicio; i <= agenda.horaFim; i++) {
+                            if (horarios.Contains(i)) continue;
+                            cmbHorario.Items.Add(i.ToString());
+                        }
+                    }
+                 }
+
+             } else {
+                 lblHorario.Hide();
+                 cmbHorario.Hide();
+             }
         }
     }
 }
