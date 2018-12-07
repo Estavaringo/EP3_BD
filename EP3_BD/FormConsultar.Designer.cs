@@ -35,6 +35,7 @@
             this.CRM = new System.Windows.Forms.TextBox();
             this.Paciente = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +79,6 @@
             this.CRM.Name = "CRM";
             this.CRM.Size = new System.Drawing.Size(100, 20);
             this.CRM.TabIndex = 4;
-            this.CRM.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // Paciente
             // 
@@ -92,15 +92,25 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(181, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "label2";
+            this.label2.Text = "CRM";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(316, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Paciente";
             // 
             // FormConsultar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 487);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Paciente);
             this.Controls.Add(this.CRM);
@@ -126,5 +136,6 @@
         private System.Windows.Forms.TextBox CRM;
         private System.Windows.Forms.TextBox Paciente;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -26,7 +26,8 @@ namespace EP3_BD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            consultas = ConsultaDAO.GetConsultas(Convert.ToInt32(idConsulta.Text));
+            dt.Clear();
+            consultas = ConsultaDAO.GetConsultas(idConsulta.Text, CRM.Text,Paciente.Text );
             foreach ( var x in consultas)
             {
                 DataRow dr = dt.NewRow();
@@ -56,12 +57,10 @@ namespace EP3_BD
             dt.Columns.Add("id_paciente");
             dt.Columns.Add("id_diagnostico");
             dt.Columns.Add("CRM");
+            dt.Columns.Add("Especialidade_Codigo");
 
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
 
-        }
     }
 }

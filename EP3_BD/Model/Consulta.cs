@@ -12,7 +12,7 @@ namespace EP3_BD.Model
         public DateTime inicio { get; set; }
         public DateTime Fim { get; set; }
         public DateTime data { get; set; }
-        public bool pagou { get; set; }
+        public char pagou { get; set; }
         public string valor_Pago { get; set; }
         public string forma_Pagamento { get; set; }
         public int id_paciente { get; set; }
@@ -20,7 +20,7 @@ namespace EP3_BD.Model
         public int CRM { get; set; }
         public int Especialidade_Codigo { get; set; }
 
-        public Consulta(DateTime inicio, DateTime Fim, DateTime data, bool pagou, string valor_Pago, string forma_Pagamento, int id_paciente, int id_diagnostico, int CRM,int Especialidade_Codigo)
+        public Consulta(DateTime inicio, DateTime Fim, DateTime data, char pagou, string valor_Pago, string forma_Pagamento, int id_paciente, int id_diagnostico, int CRM,int Especialidade_Codigo)
         {
             this.inicio = inicio;
             this.Fim = Fim;
