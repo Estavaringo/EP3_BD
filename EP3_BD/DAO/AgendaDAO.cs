@@ -95,7 +95,7 @@ namespace EP3_BD.DAO {
                     "FROM CONSULTA C, MEDICO M " +
                     "WHERE M.CRM = C.CRM " +
                     "AND M.NOME = '" + medico + "' " +
-                    "AND C.DATA = '" + data + "' ";
+                    "AND C.DATA = '" + data.Date.ToString("yyyy-MM-dd HH:mm:ss") + "' ";
                 using (var reader = command.ExecuteReader()) {
                     while (reader.Read()) {
                         horarios.Add(Convert.ToInt32(reader["INICIO"]));

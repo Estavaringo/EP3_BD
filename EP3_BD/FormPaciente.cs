@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EP3_BD.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EP3_BD.DAO;
 
 namespace EP3_BD {
     public partial class FormPaciente : Form {
@@ -54,8 +56,24 @@ namespace EP3_BD {
                 ok = false;
             }
 
-            if (ok) {
+            if (!cmbSexo.SelectedItem.ToString().Equals("M")) {
+                if (!cmbSexo.SelectedItem.ToString().Equals("F")) {
+                    ok = false;
+                }
+            }
 
+            if (ok) {
+                String cpf = txtCPF.Text;
+                String nome = txtNome.Text;
+                int idade = int.Parse(txtIdade.Text);
+                String telefone = txtTelefone.Text;
+                String sexo = cmbSexo.SelectedItem.ToString();
+                Paciente paciente = new Paciente(cpf, nome, idade, telefone, sexo);
+
+                ConsultaDAO.inserirConsulta(paciente, medico, especialidade, horario, data);
+
+                formAgendar.Show();
+                this.Hide();
 
             }
 
